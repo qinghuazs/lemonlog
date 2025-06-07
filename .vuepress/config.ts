@@ -18,7 +18,7 @@ export default defineUserConfig({
       "/java/": [
         { text: "工具类", children: ["first", "functional", "consumer"] },
         { text: "JVM", children: ["jvm-fullgc01", "jvm-memory-config", "jvmcommand", "arthas", "arthas-redefine"] },
-        { text: "线程", children: ["thread-threadpool", "javathread", "lock"] },
+        { text: "线程", children: ["thread-threadpool", "threadpool-factory","javathread", "lock"] },
       ],
       "/docs/database/mysql/": [
         { text: "应用", children: ["first", "datatype", "concurrenct"] },
