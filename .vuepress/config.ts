@@ -3,6 +3,7 @@ import type { DefaultThemeOptions } from "vuepress";
 import recoTheme from "vuepress-theme-reco";
 
 export default defineUserConfig({
+  base: "/",
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人~",
   theme: recoTheme({
