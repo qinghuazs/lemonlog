@@ -1,0 +1,152 @@
+---
+title: EndPoint扩展
+date: 2024/04/12
+---
+
+在 Spring Boot 中，`@Endpoint`注解用于创建自定义的管理端点（Actuator  endpoint）。Actuator 端点是 Spring  Boot 提供的一种功能，用于暴露应用程序的不同信息，例如应用程序的健康状况、配置信息、环境属性等。通过自定义的Actuator端点，可以向应用程序添加自定义的管理功能。
+
+### 依赖引入
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+### 自定义EndPoint
+
+自定义 EndPoint 可以声明一个类，用 `@EndPoint` 注解进行修改，并声明 id 信息。
+
+```java
+@Endpoint(id = "markdown")
+public class MarkDownEndPoint {
+
+    @ReadOperation
+    public Map<String, Object> invoke() {
+        return MakrDownEndPointManager.getMarkDownEndPoint();
+    }
+}
+```
+
+`@Endpoint` 声明该类是一个 Actuator 端点。
+
+### id 定义规范
+
+`id` 是一个 Actuator 端点的标识，定义 id 时需要遵循 `EndpointId` 的规范。官方文档中明确端点 id 中只能包含字母和数字，并忽略大小写和语法字符；同时也不限制输入 `.` 和 `-`，但是会进行警告。
+
+### 操作注解
+
+`@ReadOperation`：用来标记端点方法仅支持只读操作。
+
+`@WriteOperation`：用于标记端点方法支持写操作。写操作是指可能会对应用程序状态进行更改或产生副作用的操作，例如重启应用程序、清除缓存等。
+
+`@DeleteOperation`：用于标记端点方法支持删除操作，通常用于清除缓存、删除临时文件等。
+
+`@EndpointWebExtension`：用于扩展 Web 端点的功能，通常与`@Endpoint`注解一起使用，并且方法可以使用HTTP请求的其他部分（例如，路径变量）来接收输入参数。
+
+`@EndpointJmxExtension`：用于扩展JMX端点的功能，类似于`@EndpointWebExtension`，但是用于JMX端点。
+
+### 端点数据写入
+
+MakrDownEndPointManager 中主要是对进行解析的 markdown 文本进行记录，只记录最近的20条。具体的端点功能根据实现的业务逻辑自行去调整。
+
+```java
+public final class MakrDownEndPointManager {
+    private MakrDownEndPointManager (){
+
+    }
+
+    private final static int BACKLOG_SIZE = 20;
+
+    private final static ReentrantLock MARKDOWN_LOCK = new ReentrantLock();
+
+    private final static LinkedBlockingQueue<String> MARKDOWN_REQUESTS = new LinkedBlockingQueue(BACKLOG_SIZE);
+
+    public static void addMarkdownRequest(String markdownRequest) {
+        if (MARKDOWN_REQUESTS.offer(markdownRequest)) {
+            return;
+        }
+        try {
+            MARKDOWN_LOCK.lock();
+            MARKDOWN_REQUESTS.poll();
+            MARKDOWN_REQUESTS.offer(markdownRequest);
+        } finally {
+            MARKDOWN_LOCK.unlock();
+        }
+    }
+
+    public static Map<String, Object> getMarkDownEndPoint() {
+        List<String> markdownRequests = new ArrayList<>();
+        try {
+            MARKDOWN_LOCK.lock();
+            markdownRequests.addAll(MARKDOWN_REQUESTS);
+        } finally {
+            MARKDOWN_LOCK.unlock();
+        }
+        Map<String, Object> endPoint = new HashMap<>();
+        endPoint.put("markdown", markdownRequests);
+        return endPoint;
+    }
+}
+```
+
+### 端点信息暴露
+
+`management.endpoints.web.exposure.include` 可以设置需要暴露的 Actuator 端点，如 health、info 等信息，如果需要将所有端点都开放，则可以将其设置为 `*`。
+
+或者指定特定端点也可以。
+
+```properties
+# 开放所有端点
+management.endpoints.web.exposure.include=*
+# 开放特定端点
+management.endpoints.web.exposure.include=health,info,markdown
+```
+
+如果某些端点包含了敏感信息，可以通过 Spring Security 等进行授权控制。
+
+### 端点授权控制
+
+添加 Spring Security 依赖
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+在 application.properties 中配置安全规则
+
+```properties
+spring.security.user.name=admin
+spring.security.user.password=admin-password
+```
+
+或者自定义安全规则
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+            .antMatchers("/actuator/**").hasRole("ADMIN") // 这里保护所有Actuator端点
+            .anyRequest().authenticated()
+            .and()
+            .httpBasic();
+    }
+}
+```
+
+### 访问端点
+
+类似 http://127.0.0.1:8080/actuator/markdown , actuator 后面加上端点的 id 即可。
+
+
+
+
+
