@@ -28,6 +28,9 @@ export default defineUserConfig({
       "/docs/spring/": [
         { text: "Spring框架", children: ["first", "endpoint", "starter"] },
       ],
+      "/springboot/": [
+        { text: "SpringBoot", children: ["logback"] },
+      ],
       "/docs/htmlcssjs/TailwindCSS/": [
         { text: "tailwindcss", children: ["01all", "02按钮", "03background", "04layout"] },
       ],
@@ -67,6 +70,7 @@ export default defineUserConfig({
         children: [
           { text: "Java", link: "/docs/java/first" },
           { text: "Spring", link: "/docs/spring/first" },
+          { text: "SpringBoot", link: "/springboot/logback" },
           { text: "MyBatis", link: "/docs/mybatis/first" },
         ],
       },
