@@ -15,10 +15,10 @@ export default defineUserConfig({
     lastUpdatedText: "",
     // series 为原 sidebar
     series: {
-      "/docs/java/": [
+      "/java/": [
         { text: "工具类", children: ["first", "functional", "consumer"] },
-        { text: "虚拟机", children: ["jvmcommand", "arthas", "arthas-redefine"] },
-        { text: "线程", children: ["javathread", "lock"] },
+        { text: "JVM", children: ["jvm-fullgc01", "jvm-memory-config", "jvmcommand", "arthas", "arthas-redefine"] },
+        { text: "线程", children: ["thread-threadpool", "javathread", "lock"] },
       ],
       "/docs/database/mysql/": [
         { text: "应用", children: ["first", "datatype", "concurrenct"] },
@@ -68,7 +68,7 @@ export default defineUserConfig({
       {
         text: "后端",
         children: [
-          { text: "Java", link: "/docs/java/first" },
+          { text: "Java", link: "/java/jvm-fullgc01" },
           { text: "Spring", link: "/spring/aop" },
           { text: "SpringBoot", link: "/springboot/logback" },
           { text: "MyBatis", link: "/docs/mybatis/first" },
