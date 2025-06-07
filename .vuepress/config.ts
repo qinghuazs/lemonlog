@@ -25,11 +25,11 @@ export default defineUserConfig({
         { text: "原理", children: ["mvcc", "index", "index"] },
         { text: "问题处理", children: ["deadlock", "index", "index"] },
       ],
-      "/docs/spring/": [
-        { text: "Spring框架", children: ["first", "endpoint", "starter"] },
+      "/spring/": [
+        { text: "Spring框架", children: ["aop","extension", ] },
       ],
       "/springboot/": [
-        { text: "SpringBoot", children: ["logback"] },
+        { text: "SpringBoot", children: ["logback", "starter", "endpoint"] },
       ],
       "/docs/htmlcssjs/TailwindCSS/": [
         { text: "tailwindcss", children: ["01all", "02按钮", "03background", "04layout"] },
@@ -69,7 +69,7 @@ export default defineUserConfig({
         text: "后端",
         children: [
           { text: "Java", link: "/docs/java/first" },
-          { text: "Spring", link: "/docs/spring/first" },
+          { text: "Spring", link: "/spring/aop" },
           { text: "SpringBoot", link: "/springboot/logback" },
           { text: "MyBatis", link: "/docs/mybatis/first" },
         ],
