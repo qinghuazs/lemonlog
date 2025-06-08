@@ -12,6 +12,7 @@ export default defineUserConfig({
     author: "冬眠",
     authorAvatar: "/head.png",
     docsDir: "example",
+    plugins: ["plausible-analytics"],
     lastUpdatedText: "",
     // series 为原 sidebar
     series: {
