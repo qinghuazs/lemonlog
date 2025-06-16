@@ -57,7 +57,7 @@ if [ "$(id -u)" -ne 0 ]; then
     SUDO="sudo"
 fi
 
-NEEDS=$(require curl awk grep sed tee xargs)
+NEEDS=$(require awk grep sed tee xargs)
 if [ -n "$NEEDS" ]; then
     status "ERROR: The following tools are required but missing:"
     for NEED in $NEEDS; do
@@ -78,10 +78,12 @@ fi
 status "Installing ollama to $OLLAMA_INSTALL_DIR"
 $SUDO install -o0 -g0 -m755 -d $BINDIR
 $SUDO install -o0 -g0 -m755 -d "$OLLAMA_INSTALL_DIR/lib/ollama"
-status "Downloading Linux ${ARCH} bundle"
-curl --fail --show-error --location --progress-bar \
-    "https://ollama.com/download/ollama-linux-${ARCH}.tgz${VER_PARAM}" | \
-    $SUDO tar -xzf - -C "$OLLAMA_INSTALL_DIR"
+status "Installing Linux amd64 bundle from local file"
+if [ -f "./ollama-linux-amd64.tgz" ]; then
+    $SUDO tar -xzf "./ollama-linux-amd64.tgz" -C "$OLLAMA_INSTALL_DIR"
+else
+    error "Local file ./ollama-linux-amd64.tgz not found"
+fi
 
 if [ "$OLLAMA_INSTALL_DIR/bin/ollama" != "$BINDIR/ollama" ] ; then
     status "Making ollama accessible in the PATH in $BINDIR"
@@ -91,15 +93,19 @@ fi
 # Check for NVIDIA JetPack systems with additional downloads
 if [ -f /etc/nv_tegra_release ] ; then
     if grep R36 /etc/nv_tegra_release > /dev/null ; then
-        status "Downloading JetPack 6 components"
-        curl --fail --show-error --location --progress-bar \
-            "https://ollama.com/download/ollama-linux-${ARCH}-jetpack6.tgz${VER_PARAM}" | \
-            $SUDO tar -xzf - -C "$OLLAMA_INSTALL_DIR"
+        status "Installing JetPack 6 components from local file"
+        if [ -f "./ollama-linux-amd64-jetpack6.tgz" ]; then
+            $SUDO tar -xzf "./ollama-linux-amd64-jetpack6.tgz" -C "$OLLAMA_INSTALL_DIR"
+        else
+            warning "Local file ./ollama-linux-amd64-jetpack6.tgz not found, skipping JetPack 6 components"
+        fi
     elif grep R35 /etc/nv_tegra_release > /dev/null ; then
-        status "Downloading JetPack 5 components"
-        curl --fail --show-error --location --progress-bar \
-            "https://ollama.com/download/ollama-linux-${ARCH}-jetpack5.tgz${VER_PARAM}" | \
-            $SUDO tar -xzf - -C "$OLLAMA_INSTALL_DIR"
+        status "Installing JetPack 5 components from local file"
+        if [ -f "./ollama-linux-amd64-jetpack5.tgz" ]; then
+            $SUDO tar -xzf "./ollama-linux-amd64-jetpack5.tgz" -C "$OLLAMA_INSTALL_DIR"
+        else
+            warning "Local file ./ollama-linux-amd64-jetpack5.tgz not found, skipping JetPack 5 components"
+        fi
     else
         warning "Unsupported JetPack version detected.  GPU may not be supported"
     fi
@@ -222,10 +228,12 @@ if ! check_gpu lspci nvidia && ! check_gpu lshw nvidia && ! check_gpu lspci amdg
 fi
 
 if check_gpu lspci amdgpu || check_gpu lshw amdgpu; then
-    status "Downloading Linux ROCm ${ARCH} bundle"
-    curl --fail --show-error --location --progress-bar \
-        "https://ollama.com/download/ollama-linux-${ARCH}-rocm.tgz${VER_PARAM}" | \
-        $SUDO tar -xzf - -C "$OLLAMA_INSTALL_DIR"
+    status "Installing Linux ROCm amd64 bundle from local file"
+    if [ -f "./ollama-linux-amd64-rocm.tgz" ]; then
+        $SUDO tar -xzf "./ollama-linux-amd64-rocm.tgz" -C "$OLLAMA_INSTALL_DIR"
+    else
+        error "Local file ./ollama-linux-amd64-rocm.tgz not found"
+    fi
 
     install_success
     status "AMD GPU ready."
@@ -243,15 +251,15 @@ install_cuda_driver_yum() {
     case $PACKAGE_MANAGER in
         yum)
             $SUDO $PACKAGE_MANAGER -y install yum-utils
-            if curl -I --silent --fail --location "https://developer.download.nvidia.com/compute/cuda/repos/$1$2/$(uname -m | sed -e 's/aarch64/sbsa/')/cuda-$1$2.repo" >/dev/null ; then
-                $SUDO $PACKAGE_MANAGER-config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/$1$2/$(uname -m | sed -e 's/aarch64/sbsa/')/cuda-$1$2.repo
+            if [ -f "./cuda-$1$2.repo" ]; then
+                $SUDO cp "./cuda-$1$2.repo" "/etc/yum.repos.d/"
             else
                 error $CUDA_REPO_ERR_MSG
             fi
             ;;
         dnf)
-            if curl -I --silent --fail --location "https://developer.download.nvidia.com/compute/cuda/repos/$1$2/$(uname -m | sed -e 's/aarch64/sbsa/')/cuda-$1$2.repo" >/dev/null ; then
-                $SUDO $PACKAGE_MANAGER config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/$1$2/$(uname -m | sed -e 's/aarch64/sbsa/')/cuda-$1$2.repo
+            if [ -f "./cuda-$1$2.repo" ]; then
+                $SUDO cp "./cuda-$1$2.repo" "/etc/yum.repos.d/"
             else
                 error $CUDA_REPO_ERR_MSG
             fi
@@ -262,7 +270,11 @@ install_cuda_driver_yum() {
         rhel)
             status 'Installing EPEL repository...'
             # EPEL is required for third-party dependencies such as dkms and libvdpau
-            $SUDO $PACKAGE_MANAGER -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$2.noarch.rpm || true
+            if [ -f "./epel-release-latest-$2.noarch.rpm" ]; then
+                $SUDO $PACKAGE_MANAGER -y install "./epel-release-latest-$2.noarch.rpm" || true
+            else
+                warning "Local file ./epel-release-latest-$2.noarch.rpm not found, skipping EPEL installation"
+            fi
             ;;
     esac
 
@@ -279,8 +291,8 @@ install_cuda_driver_yum() {
 # ref: https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#debian
 install_cuda_driver_apt() {
     status 'Installing NVIDIA repository...'
-    if curl -I --silent --fail --location "https://developer.download.nvidia.com/compute/cuda/repos/$1$2/$(uname -m | sed -e 's/aarch64/sbsa/')/cuda-keyring_1.1-1_all.deb" >/dev/null ; then
-        curl -fsSL -o $TEMP_DIR/cuda-keyring.deb https://developer.download.nvidia.com/compute/cuda/repos/$1$2/$(uname -m | sed -e 's/aarch64/sbsa/')/cuda-keyring_1.1-1_all.deb
+    if [ -f "./cuda-keyring_1.1-1_all.deb" ]; then
+        cp "./cuda-keyring_1.1-1_all.deb" "$TEMP_DIR/cuda-keyring.deb"
     else
         error $CUDA_REPO_ERR_MSG
     fi
