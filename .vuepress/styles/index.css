@@ -1,0 +1,12 @@
+div[class*="language-"] {
+    border-radius: 8px !important;       
+    font-family: 'Fira Code', monospace !important; 
+    pre {
+      padding: 1.2em;               
+    }
+}
+body {
+    font-family: 'LXGW WenKai Screen';
+    font-weight: 400;
+    font-size: 17px
+}

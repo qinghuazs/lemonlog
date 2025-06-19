@@ -4,6 +4,12 @@ import recoTheme from "vuepress-theme-reco";
 
 export default defineUserConfig({
   base: "/",
+  markdown: {
+    code: {
+        lineNumbers: true, // 代码块显示行号
+        highlightLines: true, // 代码块高亮行
+    }
+  },
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人~",
   theme: recoTheme({
