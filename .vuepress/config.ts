@@ -38,6 +38,9 @@ export default defineUserConfig({
       "/springboot/": [
         { text: "SpringBoot", children: ["logback", "starter", "endpoint"] },
       ],
+      "/springcloud/": [
+        { text: "Resilience4J", children: ["resilience4j", "circuitbreaker"] },
+      ],
       "/docs/htmlcssjs/TailwindCSS/": [
         { text: "tailwindcss", children: ["01all", "02按钮", "03background", "04layout"] },
       ],
@@ -61,6 +64,9 @@ export default defineUserConfig({
       "/docs/leetcode/": [
         { text: "算法题", children: ["first"] },
       ],
+      "/leetcode/dp": [
+        { text: "动态规划", children: ["list"] },
+      ],
       "/kafka/": [
         { text: "Kafka", children: ["introduction", "Kafka安装部署.html", "提示词.html"], collapsible: true  },
         { text: "Kafka Producer", collapsible:true, children: ["指标.html", "生产者配置参数.html", "生产者重要配置参数.html", "发送消息.html", "分区计算.html", "消息追加到消息累加器.html", "粘性分区.html"] },
@@ -78,6 +84,7 @@ export default defineUserConfig({
           { text: "Java", link: "/java/jvm-fullgc01" },
           { text: "Spring", link: "/spring/aop" },
           { text: "SpringBoot", link: "/springboot/logback" },
+          { text: "SpringCloud", link: "/springcloud/resilience4j" },
           { text: "MyBatis", link: "/docs/mybatis/first" },
         ],
       },
@@ -99,6 +106,7 @@ export default defineUserConfig({
       { text: "微服务", link: "/docs/microservice/first" },
       { text: "调度任务", link: "/docs/scheduler/first" },
       { text: "算法", link: "/docs/leetcode/first" },
+      { text: "LeetCode", link: "/leetcode/dp/list" },
       { text: "Kafka", link: "/kafka/introduction" },
       {
         text: "工具",
