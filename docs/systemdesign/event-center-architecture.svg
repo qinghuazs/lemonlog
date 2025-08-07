@@ -1,0 +1,93 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="layerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F3F4F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E5E7EB;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 标题 -->
+  <rect x="0" y="0" width="800" height="60" fill="url(#headerGradient)"/>
+  <text x="400" y="35" text-anchor="middle" fill="white" font-size="24" font-weight="bold">企业内部事件中心架构</text>
+  
+  <!-- 接入层 -->
+  <rect x="50" y="80" width="700" height="100" fill="url(#layerGradient)" stroke="#D1D5DB" stroke-width="2" rx="8"/>
+  <text x="70" y="105" fill="#374151" font-size="16" font-weight="bold">接入层 (Gateway Layer)</text>
+  
+  <rect x="80" y="120" width="150" height="40" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1" rx="4"/>
+  <text x="155" y="145" text-anchor="middle" fill="#1E40AF" font-size="12">API网关</text>
+  
+  <rect x="250" y="120" width="150" height="40" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1" rx="4"/>
+  <text x="325" y="145" text-anchor="middle" fill="#1E40AF" font-size="12">协议适配</text>
+  
+  <rect x="420" y="120" width="150" height="40" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1" rx="4"/>
+  <text x="495" y="145" text-anchor="middle" fill="#1E40AF" font-size="12">认证授权</text>
+  
+  <rect x="590" y="120" width="130" height="40" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1" rx="4"/>
+  <text x="655" y="145" text-anchor="middle" fill="#1E40AF" font-size="12">限流熔断</text>
+  
+  <!-- 处理层 -->
+  <rect x="50" y="200" width="700" height="100" fill="url(#layerGradient)" stroke="#D1D5DB" stroke-width="2" rx="8"/>
+  <text x="70" y="225" fill="#374151" font-size="16" font-weight="bold">处理层 (Processing Layer)</text>
+  
+  <rect x="80" y="240" width="150" height="40" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1" rx="4"/>
+  <text x="155" y="265" text-anchor="middle" fill="#92400E" font-size="12">事件路由</text>
+  
+  <rect x="250" y="240" width="150" height="40" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1" rx="4"/>
+  <text x="325" y="265" text-anchor="middle" fill="#92400E" font-size="12">事件转换</text>
+  
+  <rect x="420" y="240" width="150" height="40" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1" rx="4"/>
+  <text x="495" y="265" text-anchor="middle" fill="#92400E" font-size="12">事件过滤</text>
+  
+  <rect x="590" y="240" width="130" height="40" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1" rx="4"/>
+  <text x="655" y="265" text-anchor="middle" fill="#92400E" font-size="12">事件聚合</text>
+  
+  <!-- 消息中间件 -->
+  <rect x="50" y="320" width="700" height="100" fill="url(#layerGradient)" stroke="#D1D5DB" stroke-width="2" rx="8"/>
+  <text x="70" y="345" fill="#374151" font-size="16" font-weight="bold">消息中间件 (Message Middleware)</text>
+  
+  <rect x="120" y="360" width="150" height="40" fill="#DCFCE7" stroke="#22C55E" stroke-width="1" rx="4"/>
+  <text x="195" y="385" text-anchor="middle" fill="#15803D" font-size="12">Apache Kafka</text>
+  
+  <rect x="300" y="360" width="150" height="40" fill="#DCFCE7" stroke="#22C55E" stroke-width="1" rx="4"/>
+  <text x="375" y="385" text-anchor="middle" fill="#15803D" font-size="12">RabbitMQ</text>
+  
+  <rect x="480" y="360" width="150" height="40" fill="#DCFCE7" stroke="#22C55E" stroke-width="1" rx="4"/>
+  <text x="555" y="385" text-anchor="middle" fill="#15803D" font-size="12">Apache Pulsar</text>
+  
+  <!-- 存储层 -->
+  <rect x="50" y="440" width="700" height="100" fill="url(#layerGradient)" stroke="#D1D5DB" stroke-width="2" rx="8"/>
+  <text x="70" y="465" fill="#374151" font-size="16" font-weight="bold">存储层 (Storage Layer)</text>
+  
+  <rect x="80" y="480" width="150" height="40" fill="#FCE7F3" stroke="#EC4899" stroke-width="1" rx="4"/>
+  <text x="155" y="505" text-anchor="middle" fill="#BE185D" font-size="12">事件存储</text>
+  
+  <rect x="250" y="480" width="150" height="40" fill="#FCE7F3" stroke="#EC4899" stroke-width="1" rx="4"/>
+  <text x="325" y="505" text-anchor="middle" fill="#BE185D" font-size="12">索引服务</text>
+  
+  <rect x="420" y="480" width="150" height="40" fill="#FCE7F3" stroke="#EC4899" stroke-width="1" rx="4"/>
+  <text x="495" y="505" text-anchor="middle" fill="#BE185D" font-size="12">归档服务</text>
+  
+  <rect x="590" y="480" width="130" height="40" fill="#FCE7F3" stroke="#EC4899" stroke-width="1" rx="4"/>
+  <text x="655" y="505" text-anchor="middle" fill="#BE185D" font-size="12">备份恢复</text>
+  
+  <!-- 数据流箭头 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+     refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B7280" />
+    </marker>
+  </defs>
+  
+  <line x1="400" y1="180" x2="400" y2="200" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="300" x2="400" y2="320" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="420" x2="400" y2="440" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 侧边监控组件 -->
+  <rect x="760" y="80" width="30" height="460" fill="#F59E0B" rx="4"/>
+  <text x="775" y="320" text-anchor="middle" fill="white" font-size="12" transform="rotate(90 775 320)">监控运维</text>
+</svg>
