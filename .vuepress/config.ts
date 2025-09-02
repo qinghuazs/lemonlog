@@ -27,10 +27,12 @@ export default defineUserConfig({
         { text: "JVM", children: ["jvm-fullgc01", "jvm-memory-config", "jvmcommand", "arthas", "arthas-redefine"] },
         { text: "线程", children: ["thread-threadpool", "threadpool-factory","threadlocal", "lock"] },
       ],
-      "/docs/database/mysql/": [
-        { text: "应用", children: ["first", "datatype", "concurrenct"] },
-        { text: "原理", children: ["mvcc", "index", "index"] },
-        { text: "问题处理", children: ["deadlock", "index", "index"] },
+      "/mysql/": [
+        { text: "应用", children: ["index"] },
+        { text: "原理", children: ["datatype","index","mvcc"] },
+        { text: "性能优化", children: ["explain"] },
+        { text: "问题处理", children: ["deadlock"] },
+       
       ],
       "/spring/": [
         { text: "Spring框架", children: ["aop","extension", ] },
@@ -100,7 +102,7 @@ export default defineUserConfig({
       {
         text: "数据库",
         children: [
-          { text: "MySQL", link: "/docs/database/mysql/first" },
+          { text: "MySQL", link: "/mysql/index.html" },
         ],
       },
       { text: "微服务", link: "/docs/microservice/first" },
