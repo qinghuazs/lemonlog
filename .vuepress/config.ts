@@ -29,7 +29,7 @@ export default defineUserConfig({
       ],
       "/mysql/": [
         { text: "应用", children: ["index"] },
-        { text: "原理", children: ["datatype","index","mvcc","group-by"] },
+        { text: "原理", children: ["datatype","index","mvcc","sql-parse","sql-select-optimize","group-by"] },
         { text: "性能优化", children: ["explain"] },
         { text: "问题处理", children: ["deadlock"] },
        
