@@ -76,7 +76,6 @@ export default defineUserConfig({
       "/git/": [
         { text: "git", children: ["unlink","branch.html","remote.html","revert.html"], collapsible: false },
       ],
-      
     },
     navbar: [
       { text: "首页", link: "/" },
