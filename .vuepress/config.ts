@@ -66,8 +66,12 @@ export default defineUserConfig({
       "/docs/leetcode/": [
         { text: "算法题", children: ["first"] },
       ],
-      "/leetcode/dp": [
-        { text: "动态规划", children: ["list"] },
+      "/leetcode/": [
+        { text: "动态规划", children: ["dp-list"] },
+        { text: "前缀和", children: ["sumRange","maxProfit"] },
+        { text: "数组", children: ["sumRange","maxProfit"] },
+        { text: "栈", children: ["ValidParentheses"] },
+        { text: "二叉树", children: ["BinaryTreeLevelOrder","BinaryTreeInorderTraversal", "BinaryTreeLowestCommonAncestor"] },
       ],
       "/kafka/": [
         { text: "Kafka", children: ["introduction", "Kafka安装部署.html", "提示词.html"], collapsible: true  },
@@ -107,7 +111,7 @@ export default defineUserConfig({
       { text: "微服务", link: "/docs/microservice/first" },
       { text: "调度任务", link: "/docs/scheduler/first" },
       { text: "算法", link: "/docs/leetcode/first" },
-      { text: "LeetCode", link: "/leetcode/dp/list" },
+      { text: "LeetCode", link: "/leetcode/dp-list" },
       { text: "Kafka", link: "/kafka/introduction" },
       {
         text: "工具",
