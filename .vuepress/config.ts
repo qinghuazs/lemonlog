@@ -80,6 +80,9 @@ export default defineUserConfig({
       "/git/": [
         { text: "git", children: ["unlink","branch.html","remote.html","revert.html"], collapsible: false },
       ],
+      "/claudecode/": [
+        { text: "Claude Code", children: ["model-switch"], collapsible: false },
+      ],
     },
     navbar: [
       { text: "首页", link: "/" },
@@ -117,6 +120,7 @@ export default defineUserConfig({
         text: "工具",
         children: [
           { text: "git", link: "/git/unlink" },
+          { text: "Claude Code", link: "/claudecode/model-switch" },
         ],
       },
     ],

@@ -1,11 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch",
-      "Read(//Users/xingleiwang/.config/**)",
-      "Bash(claude:*)",
-      "Bash(npm install:*)",
-      "Bash(*)"
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
