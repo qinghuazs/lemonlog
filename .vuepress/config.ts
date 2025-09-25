@@ -15,6 +15,9 @@ export default defineUserConfig({
   define: {
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
   },
+  ssr: {
+    noExternal: ['vuepress-theme-reco']
+  },
   markdown: {
     code: {
         lineNumbers: true, // 代码块显示行号
@@ -31,6 +34,10 @@ export default defineUserConfig({
     docsDir: "example",
     plugins: [],
     lastUpdatedText: "",
+    // 禁用可能导致Hydration问题的功能
+    colorModeSwitch: true,
+    // 确保服务端渲染的一致性
+    primaryColor: '#3aa675',
     // series 为原 sidebar
     series: {
       "/java/": [
