@@ -4,6 +4,9 @@ import recoTheme from "vuepress-theme-reco";
 
 export default defineUserConfig({
   base: "/",
+  head: [
+    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
+  ],
   markdown: {
     code: {
         lineNumbers: true, // 代码块显示行号
@@ -18,7 +21,7 @@ export default defineUserConfig({
     author: "冬眠",
     authorAvatar: "/head.png",
     docsDir: "example",
-    plugins: ["plausible-analytics"],
+    plugins: [],
     lastUpdatedText: "",
     // series 为原 sidebar
     series: {
@@ -125,5 +128,4 @@ export default defineUserConfig({
       },
     ],
   }),
-  debug: true,
 });
