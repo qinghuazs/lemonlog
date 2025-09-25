@@ -1,5 +1,5 @@
 import { defineClientConfig } from '@vuepress/client'
-import { onMounted } from 'vue'
+import { onMounted, nextTick } from 'vue'
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
@@ -8,19 +8,19 @@ export default defineClientConfig({
       app.config.errorHandler = (err, instance, info) => {
         console.warn('Vue Error:', err, info)
       }
-
-      // 确保DOM完全加载后再处理Hydration
-      app.config.globalProperties.$nextTick(() => {
-        // 强制重新渲染可能导致Hydration问题的组件
-        const event = new Event('vuepress:hydrated')
-        window.dispatchEvent(event)
-      })
     }
   },
   setup() {
-    onMounted(() => {
+    onMounted(async () => {
       // 客户端挂载完成后的处理
       if (typeof window !== 'undefined') {
+        // 等待下一个DOM更新周期
+        await nextTick()
+
+        // 发送自定义事件表示Hydration完成
+        const event = new Event('vuepress:hydrated')
+        window.dispatchEvent(event)
+
         // 延迟处理可能的Hydration差异
         setTimeout(() => {
           const elements = document.querySelectorAll('[data-hydration-mismatch]')
