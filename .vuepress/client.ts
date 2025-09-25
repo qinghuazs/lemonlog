@@ -3,10 +3,18 @@ import { onMounted, nextTick } from 'vue'
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
-    // 捕获全局Vue错误
+    // 捕获全局Vue错误和Hydration警告
     if (typeof window !== 'undefined') {
       app.config.errorHandler = (err, instance, info) => {
         console.warn('Vue Error:', err, info)
+      }
+
+      app.config.warnHandler = (msg, instance, trace) => {
+        // 抑制Hydration相关的警告
+        if (msg.includes('Hydration') || msg.includes('mismatch')) {
+          return
+        }
+        console.warn('Vue Warning:', msg, trace)
       }
     }
   },
