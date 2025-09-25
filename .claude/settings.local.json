@@ -12,7 +12,12 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Read(//Users/xingleiwang/.ssh/**)",
-      "Bash(ssh:*)"
+      "Bash(ssh:*)",
+      "Bash(node:*)",
+      "WebFetch(domain:www.aiyanzi.cn)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_snapshot"
     ],
     "deny": [],
     "ask": []
