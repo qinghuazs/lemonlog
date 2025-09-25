@@ -2,6 +2,8 @@ import { defineUserConfig } from "vuepress";
 import type { DefaultThemeOptions } from "vuepress";
 import recoTheme from "vuepress-theme-reco";
 
+// 触发Vercel重新部署 - 修复client.ts API调用
+
 export default defineUserConfig({
   base: "/",
   head: [
