@@ -2,3 +2,8 @@
 .vuepress/.temp
 node_modules
 .vuepress/dist/
+.idea/lemonlog.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/setting.xml
+.idea/vcs.xml
