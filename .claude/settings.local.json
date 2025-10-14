@@ -21,7 +21,11 @@
       "mcp__playwright__browser_evaluate",
       "Read(//Users/xingleiwang/Documents/Code/Java/moon-cloud/接口文档/用户模块接口文档/**)",
       "WebSearch",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Read(//Users/xingleiwang/.config/clash/**)",
+      "Bash(scutil:*)",
+      "Bash(killall:*)",
+      "Bash(open:*)"
     ],
     "deny": [],
     "ask": []

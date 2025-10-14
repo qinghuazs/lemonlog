@@ -8,18 +8,8 @@ export default defineUserConfig({
   base: "/",
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
-    ['meta', { name: 'theme-color', content: '#46bd87' }],
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
-  shouldPrefetch: false,
-  define: {
-    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
-    __VUE_OPTIONS_API__: true,
-    __VUE_PROD_DEVTOOLS__: false
-  },
-  ssr: {
-    noExternal: ['vuepress-theme-reco']
-  },
   markdown: {
     code: {
         lineNumbers: true, // 代码块显示行号
