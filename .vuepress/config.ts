@@ -5,17 +5,6 @@ import recoTheme from "vuepress-theme-reco";
 // 触发Vercel重新部署 - 修复client.ts API调用
 
 export default defineUserConfig({
-  base: "/",
-  head: [
-    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
-    ['link', { rel: 'icon', href: '/logo.png' }]
-  ],
-  markdown: {
-    code: {
-        lineNumbers: true, // 代码块显示行号
-        highlightLines: true, // 代码块高亮行
-    }
-  },
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人~",
   theme: recoTheme({
@@ -26,10 +15,6 @@ export default defineUserConfig({
     docsDir: "example",
     plugins: [],
     lastUpdatedText: "",
-    // 禁用可能导致Hydration问题的功能
-    colorModeSwitch: true,
-    // 确保服务端渲染的一致性
-    primaryColor: '#3aa675',
     // series 为原 sidebar
     series: {
       "/java/": [

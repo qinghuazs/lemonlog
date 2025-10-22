@@ -25,9 +25,33 @@
       "Read(//Users/xingleiwang/.config/clash/**)",
       "Bash(scutil:*)",
       "Bash(killall:*)",
-      "Bash(open:*)"
+      "Bash(open:*)",
+      "Bash(pandoc \"/Users/xingleiwang/Documents/wangxinglei/blogs/lemonlog/docs/我的经历/求职展示-王星磊-Word版.md\" -o \"/Users/xingleiwang/Documents/wangxinglei/blogs/lemonlog/docs/我的经历/求职展示-王星磊.docx\" --from markdown --to docx)",
+      "Bash(textutil -convert docx \"/Users/xingleiwang/Documents/wangxinglei/blogs/lemonlog/docs/我的经历/求职展示-王星磊.html\" -output \"/Users/xingleiwang/Documents/wangxinglei/blogs/lemonlog/docs/我的经历/求职展示-王星磊.docx\")",
+      "Read(//Users/xingleiwang/.config/**)",
+      "Read(//Users/xingleiwang/.claude/**)",
+      "Bash(test -f /opt/homebrew/lib/node_modules/context7/index.js)",
+      "Read(//opt/homebrew/lib/node_modules/**)",
+      "Bash(pkill:*)",
+      "Bash(npm uninstall -g context7)",
+      "Read(//Users/xingleiwang/.npm/_npx/**)",
+      "Bash(context7-mcp --version)",
+      "Read(//Users/xingleiwang/**)",
+      "Bash(context7-mcp --help)",
+      "Bash(echo $CONTEXT7_API_KEY)",
+      "Bash(CONTEXT7_API_KEY=\"ctx7sk-859f2734-c5d8-4a9a-837f-e503ee46b451\" /opt/homebrew/bin/context7-mcp:*)",
+      "mcp__context7__*",
+      "Read(//Applications/**)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "context7",
+    "chrome-devtools",
+    "sequential-thinking",
+    "mcp-feedback-elicitation",
+    "playwright"
+  ]
 }
