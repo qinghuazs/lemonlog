@@ -41,7 +41,9 @@
       "Bash(echo $CONTEXT7_API_KEY)",
       "Bash(CONTEXT7_API_KEY=\"ctx7sk-859f2734-c5d8-4a9a-837f-e503ee46b451\" /opt/homebrew/bin/context7-mcp:*)",
       "mcp__context7__*",
-      "Read(//Applications/**)"
+      "Read(//Applications/**)",
+      "mcp__sequential-thinking__sequentialthinking",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
