@@ -78,6 +78,21 @@ export default defineUserConfig({
       "/claudecode/": [
         { text: "Claude Code", children: ["model-switch"], collapsible: false },
       ],
+      "/AI绘画/StableDifussion/": [
+        {
+          text: "Stable Diffusion 系列课程",
+          children: [
+            "学习路线图",
+            "课程/01-基础入门",
+            "课程/02-环境搭建",
+            "课程/03-基础使用",
+            "课程/04-进阶技巧",
+            "课程/05-高级应用",
+            "课程/06-持续学习"
+          ],
+          collapsible: true
+        },
+      ],
     },
     navbar: [
       { text: "首页", link: "/" },
@@ -116,6 +131,12 @@ export default defineUserConfig({
         children: [
           { text: "git", link: "/git/unlink" },
           { text: "Claude Code", link: "/claudecode/model-switch" },
+        ],
+      },
+      {
+        text: "AI绘画",
+        children: [
+          { text: "Stable Diffusion", link: "/AI绘画/StableDifussion/学习路线图" },
         ],
       },
     ],
