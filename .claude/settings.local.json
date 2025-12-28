@@ -44,7 +44,9 @@
       "Read(//Applications/**)",
       "mcp__sequential-thinking__sequentialthinking",
       "Bash(mkdir:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__take_snapshot"
     ],
     "deny": [],
     "ask": []
