@@ -93,6 +93,9 @@ export default defineUserConfig({
           collapsible: true
         },
       ],
+      "/docs/ai/模型/": [
+        { text: "AI模型", children: ["通义千问图像编辑模型"], collapsible: false },
+      ],
     },
     navbar: [
       { text: "首页", link: "/" },
@@ -137,6 +140,7 @@ export default defineUserConfig({
         text: "AI绘画",
         children: [
           { text: "Stable Diffusion", link: "/AI绘画/StableDifussion/学习路线图" },
+          { text: "AI模型", link: "/docs/ai/模型/通义千问图像编辑模型" },
         ],
       },
     ],
