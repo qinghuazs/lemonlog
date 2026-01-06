@@ -96,6 +96,9 @@ export default defineUserConfig({
       "/docs/ai/模型/": [
         { text: "AI模型", children: ["通义千问图像编辑模型"], collapsible: false },
       ],
+      "/docs/AI绘画/": [
+        { text: "AI绘画", children: ["通义万象文生图完全指南", "通义千问图像编辑完全指南"], collapsible: false },
+      ],
     },
     navbar: [
       { text: "首页", link: "/" },
@@ -140,6 +143,8 @@ export default defineUserConfig({
         text: "AI绘画",
         children: [
           { text: "Stable Diffusion", link: "/AI绘画/StableDifussion/学习路线图" },
+          { text: "通义万象文生图", link: "/docs/AI绘画/通义万象文生图完全指南" },
+          { text: "通义千问图像编辑", link: "/docs/AI绘画/通义千问图像编辑完全指南" },
           { text: "AI模型", link: "/docs/ai/模型/通义千问图像编辑模型" },
         ],
       },
