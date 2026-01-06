@@ -46,7 +46,11 @@
       "Bash(mkdir:*)",
       "Bash(test:*)",
       "mcp__chrome-devtools__navigate_page",
-      "mcp__chrome-devtools__take_snapshot"
+      "mcp__chrome-devtools__take_snapshot",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__wait_for",
+      "mcp__chrome-devtools__press_key",
+      "WebFetch(domain:help.aliyun.com)"
     ],
     "deny": [],
     "ask": []
